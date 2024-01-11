@@ -5,7 +5,15 @@ import re
 from datetime import datetime
 import sys
 import getpass
-import msvcrt
+
+
+server_name = 'webserver'
+database_name = 'webHRMS' 
+username_name =  'ajax'
+database_password = 'Forward@123'
+
+attendance_table_name = 'tbl_Attendance_Short'
+device_table_name = 'PayRoll_payroll_deviceinfo'
 
 # devices = []
 def get_input(prompt):
@@ -38,11 +46,17 @@ def get_masked_input(prompt, mask_char='#'):
 def database_connection():
     while True:
         try:
-            server = get_input("\nEnter server address: ")
-            database = get_input("Enter database name: ")
-            username = get_input("Enter username: ")
-            # password = getpass.getpass(prompt='Enter your password: ')
-            password = get_masked_input("Enter your password: ", mask_char='#')
+            
+            server = server_name
+            database = database_name
+            username =  username_name
+            password = database_password
+            
+            # server = get_input("\nEnter server address: ")
+            # database = get_input("Enter database name: ")
+            # username = get_input("Enter username: ")
+            # # password = getpass.getpass(prompt='Enter your password: ')
+            # password = get_masked_input("Enter your password: ", mask_char='#')
             conn = pyodbc.connect(
                 f'DRIVER={{ODBC Driver 17 for SQL Server}};'
                 f'SERVER={server};'
@@ -146,7 +160,8 @@ if __name__ == '__main__':
     db_conn = database_connection()
     if db_conn:
         while True:
-            table_name = get_input("Enter the table name for attendance where you want to save attendance: ")
+            table_name = attendance_table_name
+            # table_name = get_input("Enter the table name for attendance where you want to save attendance: ")
             if table_exists(db_conn, table_name):
                 print(f"The table '{table_name}' exists.")
                 break
@@ -156,7 +171,8 @@ if __name__ == '__main__':
                     sys.exit("Table name not provided. Exiting the script.")
             
         while True:
-            devices_table_name = get_input("Enter the table name for attendance where you get device table: ")
+            devices_table_name = device_table_name
+            # devices_table_name = get_input("Enter the table name for attendance where you get device table: ")
             if table_exists(db_conn, devices_table_name):
                 print(f"The table '{devices_table_name}' exists.")
                 break

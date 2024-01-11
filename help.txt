@@ -1,0 +1,10 @@
+
+open attendance in notepad 
+and then change database and table configurations
+
+webserver
+webHRMS
+ajax
+Forward@123
+tbl_Attendance_Short
+PayRoll_payroll_deviceinfo
